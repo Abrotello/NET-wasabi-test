@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/NET-wasabi-test.props" />
+</Project>

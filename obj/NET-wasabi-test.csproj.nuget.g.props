@@ -15,5 +15,6 @@
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgAWSSDK_Core Condition=" '$(PkgAWSSDK_Core)' == '' ">/Users/adrianbotello/.nuget/packages/awssdk.core/4.0.3.3</PkgAWSSDK_Core>
     <PkgAWSSDK_S3 Condition=" '$(PkgAWSSDK_S3)' == '' ">/Users/adrianbotello/.nuget/packages/awssdk.s3/4.0.13.1</PkgAWSSDK_S3>
+    <PkgAWSSDK_IdentityManagement Condition=" '$(PkgAWSSDK_IdentityManagement)' == '' ">/Users/adrianbotello/.nuget/packages/awssdk.identitymanagement/4.0.8.1</PkgAWSSDK_IdentityManagement>
   </PropertyGroup>
 </Project>

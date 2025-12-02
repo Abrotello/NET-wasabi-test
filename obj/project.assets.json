@@ -15,6 +15,22 @@
           }
         }
       },
+      "AWSSDK.IdentityManagement/4.0.8.1": {
+        "type": "package",
+        "dependencies": {
+          "AWSSDK.Core": "[4.0.3.3, 5.0.0)"
+        },
+        "compile": {
+          "lib/net8.0/AWSSDK.IdentityManagement.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.IdentityManagement.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "AWSSDK.S3/4.0.13.1": {
         "type": "package",
         "dependencies": {
@@ -60,6 +76,35 @@
         "tools/account-management.ps1"
       ]
     },
+    "AWSSDK.IdentityManagement/4.0.8.1": {
+      "sha512": "7Sfb3AS8A1nQKMznwuWT6sa8BESSiBDFSeBzzRiAZkTG5Z+bM3ZP1QGQdmFcj6Dg6vec0FfmvkRLJ3pPhjQrRQ==",
+      "type": "package",
+      "path": "awssdk.identitymanagement/4.0.8.1",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/AWSSDK.IdentityManagement.CodeAnalysis.dll",
+        "analyzers/dotnet/cs/SharedAnalysisCode.dll",
+        "awssdk.identitymanagement.4.0.8.1.nupkg.sha512",
+        "awssdk.identitymanagement.nuspec",
+        "images/AWSLogo.png",
+        "lib/net472/AWSSDK.IdentityManagement.dll",
+        "lib/net472/AWSSDK.IdentityManagement.pdb",
+        "lib/net472/AWSSDK.IdentityManagement.xml",
+        "lib/net8.0/AWSSDK.IdentityManagement.dll",
+        "lib/net8.0/AWSSDK.IdentityManagement.pdb",
+        "lib/net8.0/AWSSDK.IdentityManagement.xml",
+        "lib/netcoreapp3.1/AWSSDK.IdentityManagement.dll",
+        "lib/netcoreapp3.1/AWSSDK.IdentityManagement.pdb",
+        "lib/netcoreapp3.1/AWSSDK.IdentityManagement.xml",
+        "lib/netstandard2.0/AWSSDK.IdentityManagement.dll",
+        "lib/netstandard2.0/AWSSDK.IdentityManagement.pdb",
+        "lib/netstandard2.0/AWSSDK.IdentityManagement.xml",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
     "AWSSDK.S3/4.0.13.1": {
       "sha512": "+YDlfV80LsY9Q/+G31SepQW+XqLYIyqlpfkhHtHMAsB18T1dRtIGaiPtqkdYSPxBJpVQ+FaxwZ45bIwLneKrxA==",
       "type": "package",
@@ -93,6 +138,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "AWSSDK.Core >= 4.0.3.3",
+      "AWSSDK.IdentityManagement >= 4.0.8.1",
       "AWSSDK.S3 >= 4.0.13.1"
     ]
   },
@@ -142,6 +188,10 @@
             "target": "Package",
             "version": "[4.0.3.3, )"
           },
+          "AWSSDK.IdentityManagement": {
+            "target": "Package",
+            "version": "[4.0.8.1, )"
+          },
           "AWSSDK.S3": {
             "target": "Package",
             "version": "[4.0.13.1, )"
@@ -159,9 +209,6 @@
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
-          "Microsoft.AspNetCore.App": {
-            "privateAssets": "none"
-          },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }

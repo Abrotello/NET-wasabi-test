@@ -9,6 +9,7 @@
       "NET-wasabi-test/1.0.0": {
         "dependencies": {
           "AWSSDK.Core": "4.0.3.3",
+          "AWSSDK.IdentityManagement": "4.0.8.1",
           "AWSSDK.S3": "4.0.13.1"
         },
         "runtime": {
@@ -20,6 +21,17 @@
           "lib/net8.0/AWSSDK.Core.dll": {
             "assemblyVersion": "4.0.0.0",
             "fileVersion": "4.0.3.3"
+          }
+        }
+      },
+      "AWSSDK.IdentityManagement/4.0.8.1": {
+        "dependencies": {
+          "AWSSDK.Core": "4.0.3.3"
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.IdentityManagement.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.8.1"
           }
         }
       },
@@ -48,6 +60,13 @@
       "sha512": "sha512-YQv10JuxnciWh0QwnkarSbge4gXQV1qTURf5jkBjNUH/3jYS9QrbxopA4TK1qdjfOfP37tqiJkLSrRRNqX81aw==",
       "path": "awssdk.core/4.0.3.3",
       "hashPath": "awssdk.core.4.0.3.3.nupkg.sha512"
+    },
+    "AWSSDK.IdentityManagement/4.0.8.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7Sfb3AS8A1nQKMznwuWT6sa8BESSiBDFSeBzzRiAZkTG5Z+bM3ZP1QGQdmFcj6Dg6vec0FfmvkRLJ3pPhjQrRQ==",
+      "path": "awssdk.identitymanagement/4.0.8.1",
+      "hashPath": "awssdk.identitymanagement.4.0.8.1.nupkg.sha512"
     },
     "AWSSDK.S3/4.0.13.1": {
       "type": "package",

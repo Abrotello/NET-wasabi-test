@@ -47,6 +47,10 @@
               "target": "Package",
               "version": "[4.0.3.3, )"
             },
+            "AWSSDK.IdentityManagement": {
+              "target": "Package",
+              "version": "[4.0.8.1, )"
+            },
             "AWSSDK.S3": {
               "target": "Package",
               "version": "[4.0.13.1, )"
@@ -64,9 +68,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

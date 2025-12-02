@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/adrianbotello/Projects/NET-wasabi-test/NET-wasabi-test.csproj": {}
+    "C:\\Users\\AdriánBotelloGonzá\\Documents\\Proyectos\\NET-wasabi-test\\NET-wasabi-test.csproj": {}
   },
   "projects": {
-    "/Users/adrianbotello/Projects/NET-wasabi-test/NET-wasabi-test.csproj": {
+    "C:\\Users\\AdriánBotelloGonzá\\Documents\\Proyectos\\NET-wasabi-test\\NET-wasabi-test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/adrianbotello/Projects/NET-wasabi-test/NET-wasabi-test.csproj",
+        "projectUniqueName": "C:\\Users\\AdriánBotelloGonzá\\Documents\\Proyectos\\NET-wasabi-test\\NET-wasabi-test.csproj",
         "projectName": "NET-wasabi-test",
-        "projectPath": "/Users/adrianbotello/Projects/NET-wasabi-test/NET-wasabi-test.csproj",
-        "packagesPath": "/Users/adrianbotello/.nuget/packages/",
-        "outputPath": "/Users/adrianbotello/Projects/NET-wasabi-test/obj/",
+        "projectPath": "C:\\Users\\AdriánBotelloGonzá\\Documents\\Proyectos\\NET-wasabi-test\\NET-wasabi-test.csproj",
+        "packagesPath": "C:\\Users\\AdriánBotelloGonzá\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\AdriánBotelloGonzá\\Documents\\Proyectos\\NET-wasabi-test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/adrianbotello/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\AdriánBotelloGonzá\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -37,7 +37,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -72,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.416/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

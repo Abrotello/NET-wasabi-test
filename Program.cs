@@ -1,7 +1,4 @@
-﻿using System;
-using Amazon.IdentityManagement;
-using Amazon.Runtime.CredentialManagement;
-using Amazon.S3;
+﻿using Amazon.Runtime.CredentialManagement;
 
 namespace AWSWasabi
 {
@@ -9,29 +6,17 @@ namespace AWSWasabi
     {
         public static void Main(string[] args)
         {
-            // var iam_config = new AmazonIdentityManagementServiceConfig { ServiceURL = "https://iam.wasabisys.com" };
-            var s3_config = new AmazonS3Config() { ServiceURL = "https://s3.us-west-1.wasabisys.com" };
-
+            Console.WriteLine("Main method");
             var chain = new CredentialProfileStoreChain();
-            if (chain.TryGetProfile("wasabi", out var profile))
+            if (!chain.TryGetAWSCredentials("wasabi", out var profile))
             {
-                Console.WriteLine("Wasabi profile found.");
-                var access_key = profile.Options.AccessKey;
-                var secret_key = profile.Options.SecretKey;
-
-                var s3 = new AmazonS3Client(access_key, secret_key, s3_config);
-                var buckets = s3.ListBucketsAsync().Result;
-                Console.WriteLine("Buckets:");
-                foreach (var bucket in buckets.Buckets)
-                {
-                    Console.WriteLine(bucket.BucketName);
-                }
+                Console.WriteLine("Could not find Wasabi credentials in the AWS credential store.");
+                return;
             }
-            else
-            {
-                Console.WriteLine("Wasabi profile not found.");
-            }
-
+            var credentials = profile.GetCredentials();
+            Wasabi wasabi = new(credentials.AccessKey, credentials.SecretKey);
+            //wasabi.createBucket("bucket-de-mariana", "us-east-1");
+            wasabi.ListBuckets();
         }
     }
 }

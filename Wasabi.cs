@@ -20,32 +20,17 @@ public class Wasabi
         _s3 = new AmazonS3Client(new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY), s3Config);
     }
 
-    public async Task CreateBucketAsync(string bucketName, string region = "us-east-1", bool enableObjectLock = false)
+    public async Task CreateBucketAsync(string bucketName)
     {
         try
         {
             var request = new PutBucketRequest
             {
                 BucketName = bucketName,
-                BucketRegionName = region,
-                UseClientRegion = false,
-                ObjectLockEnabledForBucket = enableObjectLock
+
             };
 
             await _s3.PutBucketAsync(request);
-
-            if (enableObjectLock)
-            {
-                PutBucketVersioningRequest versioningRequest = new PutBucketVersioningRequest
-                {
-                    BucketName = bucketName,
-                    VersioningConfig = new S3BucketVersioningConfig
-                    {
-                        Status = "Enabled"
-                    }
-                };
-                await _s3.PutBucketVersioningAsync(versioningRequest);
-            }
 
             Console.WriteLine($"Bucket {bucketName} created successfully.");
         } catch (Exception ex)

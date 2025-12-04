@@ -6,7 +6,7 @@ namespace AWSWasabi
 {
     public static class Program
     {
-        const string regex = "^[a-z]{3,}[a-z0-9]*[a-z0-9]";
+        const string regex = "^[a-z]{3,}[a-z0-9[]*a-z0-9]";
         public static async Task Main(string[] args)
         {
             
@@ -48,14 +48,7 @@ namespace AWSWasabi
                 case "2":
                     Console.Write("Enter bucket name: ");
                     string bucketName = Console.ReadLine();
-                    Console.Write("Enter region (us-east-1): ");
-                    string region = Console.ReadLine();
-                    bool isValid = Regex.IsMatch(bucketName, regex);
-                    bool objectlock = false;
-                    Console.Write("Object Lock? Y/N: " );
-                    if (Console.ReadLine() == "Y" || Console.ReadLine() == "y") { objectlock = true; }
-                    if (!isValid) {Console.WriteLine("Nombre de bucket no valido"); return;}
-                    await wasabi.CreateBucketAsync(bucketName, region, objectlock);
+                    await wasabi.CreateBucketAsync(bucketName);
                     break;
                 case "3":
                     // Delete Bucket

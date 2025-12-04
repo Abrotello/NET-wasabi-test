@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NET-wasabi-test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+44fe963f3f5de8c1e0508c90116ff05d12c59733")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0bb64c592a0ded3500b34dd89627833ae3845c17")]
 [assembly: System.Reflection.AssemblyProductAttribute("NET-wasabi-test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NET-wasabi-test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

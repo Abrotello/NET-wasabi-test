@@ -1,86 +1,142 @@
+using System.Runtime.Versioning;
 using Amazon.IdentityManagement;
+using Amazon.Runtime;
 using Amazon.S3;
+using Amazon.S3.Model;
 
-public class Wasabi(string accessKey, string secretKey)
+public class Wasabi
 {
-    private readonly string ACCESS_KEY = accessKey;
-    private readonly string SECRET_KEY = secretKey;
+    private readonly string ACCESS_KEY;
+    private readonly string SECRET_KEY;
+    private readonly AmazonS3Client _s3;
 
 
-    private Boolean Connect()
+    public Wasabi(string accessKey, string secretKey)
     {
-        if (string.IsNullOrEmpty(SECRET_KEY) || string.IsNullOrEmpty(ACCESS_KEY))
-        {
-            Console.WriteLine("Warning: Secret Key or Access Key is empty!");
-            return false;
-        }
+        ACCESS_KEY = accessKey;
+        SECRET_KEY = secretKey;
 
-        Console.WriteLine("Connecting to Wasabi with provided keys...");
-        
-        var iamConfig = new AmazonIdentityManagementServiceConfig { ServiceURL = "https://iam.wasabisys.com" };
-        var iamClient = new AmazonIdentityManagementServiceClient(ACCESS_KEY, SECRET_KEY, iamConfig);
-        
-        try
-        {
-            var response = iamClient.ListUsersAsync().Result;
-            Console.WriteLine($"Successfully connected to Wasabi. Number of users: {response.Users.Count}");
-            return true;
-        }
-        catch (Exception ex)
-        { 
-            Console.WriteLine($"Error connecting to Wasabi: {ex.Message}");
-            return false;
-        }
+        var s3Config = new AmazonS3Config() { ServiceURL = "https://s3.wasabisys.com", ForcePathStyle = true };
+        _s3 = new AmazonS3Client(new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY), s3Config);
     }
 
-    public void CreateBucket(string bucketName, string region)
+    public async Task CreateBucketAsync(string bucketName, string region = "us-east-1", bool enableObjectLock = false)
     {
-        if (!Connect()) return;
-
-        var s3Config = new AmazonS3Config() { ServiceURL = "https://s3.wasabisys.com" };
-        var s3 = new AmazonS3Client(ACCESS_KEY, SECRET_KEY, s3Config);
-
         try
         {
-            var putBucketRequest = new Amazon.S3.Model.PutBucketRequest
+            var request = new PutBucketRequest
             {
                 BucketName = bucketName,
-                UseClientRegion = true
+                BucketRegionName = region,
+                UseClientRegion = false,
+                ObjectLockEnabledForBucket = enableObjectLock
             };
 
-            var response = s3.PutBucketAsync(putBucketRequest).Result;
-            Console.WriteLine($"Bucket '{bucketName}' created successfully in region '{region}'.");
-        }
-        catch (Exception ex)
+            await _s3.PutBucketAsync(request);
+
+            if (enableObjectLock)
+            {
+                PutBucketVersioningRequest versioningRequest = new PutBucketVersioningRequest
+                {
+                    BucketName = bucketName,
+                    VersioningConfig = new S3BucketVersioningConfig
+                    {
+                        Status = "Enabled"
+                    }
+                };
+                await _s3.PutBucketVersioningAsync(versioningRequest);
+            }
+
+            Console.WriteLine($"Bucket {bucketName} created successfully.");
+        } catch (Exception ex)
         {
-            Console.WriteLine($"Error creating bucket: {ex.Message}");
+            Console.WriteLine(ex.Message);
         }
     }
 
-    public void ListBuckets()
+    public async Task DeleteBucketAsync(string bucketName)
     {
-        if (!Connect()) return;
-
-        var s3Config = new AmazonS3Config() { ServiceURL = "https://s3.wasabisys.com" };
-        var s3 = new AmazonS3Client(ACCESS_KEY, SECRET_KEY, s3Config);
-
         try
         {
-            var response = s3.ListBucketsAsync().Result;
+            await _s3.DeleteBucketAsync(bucketName);
+            Console.WriteLine($"Bucket {bucketName} deleted successfully.");
+        } catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    public async Task UploadFileAsync(string bucketName, string filePath, string fileName)
+    {
+        try
+        {
+            var request = new PutObjectRequest
+            {
+                BucketName = bucketName,
+                Key = fileName,
+                FilePath = filePath,
+                UseChunkEncoding = false,
+            };
+            await _s3.PutObjectAsync(request);
+            Console.WriteLine($"File uploaded to bucket {bucketName} successfully.");
+        } catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    public async Task DeleteFileAsync(string bucketName, string key)
+    {
+        try
+        {
+            await _s3.DeleteObjectAsync(bucketName, key);
+            Console.WriteLine($"File deleted from bucket {bucketName} successfully.");
+        } catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    public async Task DownloadFileAsync(string bucketName, string key)
+    {
+        
+        try
+        {
+            string downloadPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), key);
+            
+            GetObjectRequest request = new GetObjectRequest
+            {
+                BucketName = bucketName,
+                Key = key
+            };
+
+            using (var response = await _s3.GetObjectAsync(request))
+            {
+                await response.WriteResponseStreamToFileAsync(downloadPath, false, default);
+            }
+
+            Console.WriteLine($"File downloaded from bucket {bucketName} successfully. Path: {downloadPath}");
+
+        } catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    public async Task ListBucketsAsync()
+    {
+        try
+        {
+            var response = await _s3.ListBucketsAsync();
             Console.WriteLine("Buckets:");
+
             foreach (var bucket in response.Buckets)
             {
                 Console.WriteLine($"- {bucket.BucketName}");
             }
-        }
-        catch (Exception ex)
+        } catch (Exception ex)
         {
-            Console.WriteLine($"Error listing buckets: {ex.Message}");
+            Console.WriteLine(ex.Message);
         }
-    }
-
-    public void DeleteBucket(string bucketName)
-    {
-        
     }
 }

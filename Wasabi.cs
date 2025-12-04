@@ -54,6 +54,7 @@ public class Wasabi
         }
     }
 
+    // TODO
     public async Task DeleteBucketAsync(string bucketName)
     {
         try
@@ -122,6 +123,8 @@ public class Wasabi
             Console.WriteLine(ex.Message);
         }
     }
+
+    // HASTA AQUI
 
     public async Task ListBucketsAsync()
     {

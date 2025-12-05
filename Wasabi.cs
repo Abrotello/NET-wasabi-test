@@ -5,6 +5,7 @@ using Amazon.S3;
 using Amazon.S3.Model;
 
 public class Wasabi
+
 {
     private readonly string ACCESS_KEY;
     private readonly string SECRET_KEY;
@@ -33,7 +34,8 @@ public class Wasabi
             await _s3.PutBucketAsync(request);
 
             Console.WriteLine($"Bucket {bucketName} created successfully.");
-        } catch (Exception ex)
+        }
+        catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
         }
@@ -46,7 +48,8 @@ public class Wasabi
         {
             await _s3.DeleteBucketAsync(bucketName);
             Console.WriteLine($"Bucket {bucketName} deleted successfully.");
-        } catch (Exception ex)
+        }
+        catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
         }
@@ -65,7 +68,8 @@ public class Wasabi
             };
             await _s3.PutObjectAsync(request);
             Console.WriteLine($"File uploaded to bucket {bucketName} successfully.");
-        } catch (Exception ex)
+        }
+        catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
         }
@@ -77,7 +81,8 @@ public class Wasabi
         {
             await _s3.DeleteObjectAsync(bucketName, key);
             Console.WriteLine($"File deleted from bucket {bucketName} successfully.");
-        } catch (Exception ex)
+        }
+        catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
         }
@@ -85,11 +90,11 @@ public class Wasabi
 
     public async Task DownloadFileAsync(string bucketName, string key)
     {
-        
+
         try
         {
             string downloadPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), key);
-            
+
             GetObjectRequest request = new GetObjectRequest
             {
                 BucketName = bucketName,
@@ -103,7 +108,8 @@ public class Wasabi
 
             Console.WriteLine($"File downloaded from bucket {bucketName} successfully. Path: {downloadPath}");
 
-        } catch (Exception ex)
+        }
+        catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
         }
@@ -122,7 +128,29 @@ public class Wasabi
             {
                 Console.WriteLine($"- {bucket.BucketName}");
             }
-        } catch (Exception ex)
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    public async Task ListFilesAsync(string bucketName)
+    {
+        try
+        {
+            var request = new ListObjectsV2Request
+            {
+                BucketName = bucketName
+            };
+            var response = await _s3.ListObjectsV2Async(request);
+            Console.WriteLine($"Files in bucket {bucketName}:");
+            foreach (var obj in response.S3Objects)
+            {
+                Console.WriteLine($"- {obj.Key} (Size: {obj.Size} bytes)");
+            }
+        }
+        catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
         }

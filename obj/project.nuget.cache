@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "2bK/rc8uyzw=",
+  "dgSpecHash": "REwR4moHzr4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\AdriánBotelloGonzá\\Documents\\Proyectos\\NET-wasabi-test\\NET-wasabi-test.csproj",
+  "projectFilePath": "C:\\Proyectos\\NimboxeS3WithDotnet\\NET-wasabi-test.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\AdriánBotelloGonzá\\.nuget\\packages\\awssdk.core\\4.0.3.3\\awssdk.core.4.0.3.3.nupkg.sha512",
-    "C:\\Users\\AdriánBotelloGonzá\\.nuget\\packages\\awssdk.identitymanagement\\4.0.8.1\\awssdk.identitymanagement.4.0.8.1.nupkg.sha512",
-    "C:\\Users\\AdriánBotelloGonzá\\.nuget\\packages\\awssdk.s3\\4.0.13.1\\awssdk.s3.4.0.13.1.nupkg.sha512"
+    "C:\\Users\\CarlosIsaelRamírezG\\.nuget\\packages\\awssdk.core\\4.0.3.3\\awssdk.core.4.0.3.3.nupkg.sha512",
+    "C:\\Users\\CarlosIsaelRamírezG\\.nuget\\packages\\awssdk.identitymanagement\\4.0.8.1\\awssdk.identitymanagement.4.0.8.1.nupkg.sha512",
+    "C:\\Users\\CarlosIsaelRamírezG\\.nuget\\packages\\awssdk.s3\\4.0.13.1\\awssdk.s3.4.0.13.1.nupkg.sha512"
   ],
   "logs": []
 }
